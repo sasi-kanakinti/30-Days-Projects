@@ -1,12 +1,10 @@
 import requests
 
 def get_weather(city):
-    # Using Open-Meteo’s free API
     url = "https://geocoding-api.open-meteo.com/v1/search"
     params = {"name": city}
 
     try:
-        # Step 1: Get coordinates for the city
         geo_response = requests.get(url, params=params)
         geo_response.raise_for_status()
         geo_data = geo_response.json()
@@ -18,7 +16,6 @@ def get_weather(city):
         lat = geo_data["results"][0]["latitude"]
         lon = geo_data["results"][0]["longitude"]
 
-        # Step 2: Fetch weather data
         weather_url = "https://api.open-meteo.com/v1/forecast"
         weather_params = {
             "latitude": lat,
